@@ -4,7 +4,6 @@ const Track = require('../model/Track');
 const User = require('../model/User');
 const multer = require('multer');
 const { trackValidation } = require('../validation/validation');
-const User = require('../model/User');
 
 const storage = multer.diskStorage({ 
     destination: function(req, file, cb) { //multer esegue queste funzioni ogni volta che un file viene ricevuto
