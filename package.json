@@ -6,6 +6,7 @@
   "scripts": {
     "start:dev": "nodemon index.js",
     "install": "npm install",
+    "heroku-postbuild": "npm run install",
     "start": "node index.js"
   },
   "author": "",

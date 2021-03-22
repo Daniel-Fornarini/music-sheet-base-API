@@ -4,6 +4,8 @@ const mongoose = require('mongoose')
 const dotenv = require('dotenv');
 const cors = require('cors');
 
+const port = process.env.PORT || 8080;
+
 //Import Routes
 const authRoute = require('./routes/auth');
 const postRoute = require('./routes/postTrack');
@@ -30,4 +32,4 @@ app.use('/api/POST/track', postRoute);
 app.use('/api/GET/composer', composerRoute);
 app.use('/api/GET/tracks', trackRoute);
 
-app.listen(3000, () => console.log('Server is up and running'));
+app.listen(port, () => console.log('Server is up and running'));
