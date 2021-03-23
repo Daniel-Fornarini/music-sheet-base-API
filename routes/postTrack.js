@@ -10,8 +10,10 @@ const storage = multer.diskStorage({
         cb(null, './uploads'); // errore e cartella dove mettere il file
     },
     filename: function(req, file, cb) {
-        const name = file.originalname;
-        cb(null, new Date().toISOString() + name.replace(/ /g, '_'));
+        let name = file.originalname;
+        name = name.replace(/ /g, '_');
+        name = name.replace(/%/g, '_')
+        cb(null, new Date().toISOString() + name);
     }
 });
 
