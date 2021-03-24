@@ -23,7 +23,9 @@ mongoose.connect(
 
 //Middlewares
 app.use(express.json());
-app.use(cors());
+app.use(cors({
+    exposedHeaders: 'auth-token'
+}));
 app.use('/uploads', express.static('uploads')); // rende la cartella accessibile 
 
 //Route Middlewares
