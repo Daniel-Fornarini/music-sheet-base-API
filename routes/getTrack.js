@@ -12,7 +12,7 @@ router.get('/', async (req, res) => {
 
 router.get('/:trackTitle', async (req, res) => {
     try {
-        const tracks = await Track.find({title: req.params.trackTitle});
+        const tracks = await Track.find({title: req.params.trackTitle.toLowerCase()});
         res.send(tracks);
     } catch(err) {
         res.status(400).send({error: err});
