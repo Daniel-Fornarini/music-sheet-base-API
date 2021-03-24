@@ -30,9 +30,9 @@ router.post('/register', async (req, res) => {
     });
     try {
         const savedUser = await user.save();
-        res.send({user: savedUser._id});
+        res.send({registration: true});
     } catch(err) {
-        res.status(400).send(err);
+        res.status(400).send({error: err});
     }
 });
 
@@ -40,24 +40,24 @@ router.post('/login', async (req, res) => {
     //Data validation
     const { error } = loginValidation(req.body); 
     if(error) {
-        return res.status(400).send(error.details[0].message); // 400 bad request
+        return res.status(400).send({error: error.details[0].message}); // 400 bad request
     }
 
     // Cheking if email exist
     const user = await User.findOne({ email: req.body.email });
     if(!user) {
-        return res.status(400).send('Email or password is wrong');
+        return res.status(400).send({error: 'Email or password is wrong'});
     }
 
     //Password validation
     const validPassword = await bcrypt.compare(req.body.password, user.password);
     if(!validPassword) {
-        return res.status(400).send('Email or password is wrong');
+        return res.status(400).send({error: 'Email or password is wrong'});
     }
 
     //Creating the token
     const token  = jwt.sign({_id: user._id}, process.env.TOKEN_SECRET);
-    res.header('auth-token', token).send(token);
+    res.header('auth-token', token).send({token: token});
 });
 
 module.exports = router;
