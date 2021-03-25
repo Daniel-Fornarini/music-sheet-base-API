@@ -26,7 +26,7 @@ app.use(express.json());
 app.use(cors({
     exposedHeaders: 'auth-token'
 }));
-app.use('/uploads', express.static('uploads')); // rende la cartella accessibile 
+//app.use('/uploads', express.static('uploads')); // rende la cartella accessibile 
 
 //Route Middlewares
 app.use('/api/user', authRoute);
