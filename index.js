@@ -34,6 +34,6 @@ app.use('/api/user', authRoute);
 app.use('/api/POST/track', postRoute);
 app.use('/api/GET/composer', composerRoute);
 app.use('/api/GET/tracks', trackRoute);
-app.use('api/GET/id', idRoute);
+app.use('/api/GET/id', idRoute);
 
 app.listen(port, () => console.log('Server is up and running'));
