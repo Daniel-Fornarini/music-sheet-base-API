@@ -81,7 +81,7 @@ router.post('/', verify, upload.single('music_sheet'), async (req, res) => { // 
         Bucket: process.env.AWS_BUCKET_NAME,
         Key: `${uuid}.pdf`,
         Body: req.file.buffer,
-        ContentType: 'application/pdf',
+        //ContentType: 'application/pdf',
         ACL: 'public-read'
     }
 
