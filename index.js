@@ -11,6 +11,7 @@ const authRoute = require('./routes/auth');
 const postRoute = require('./routes/postTrack');
 const composerRoute = require('./routes/getComposer');
 const trackRoute = require('./routes/getTrack');
+const idRoute = require('./routes/getId');
 
 dotenv.config();
 
@@ -33,5 +34,6 @@ app.use('/api/user', authRoute);
 app.use('/api/POST/track', postRoute);
 app.use('/api/GET/composer', composerRoute);
 app.use('/api/GET/tracks', trackRoute);
+app.use('api/GET/id', idRoute);
 
 app.listen(port, () => console.log('Server is up and running'));
