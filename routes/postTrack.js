@@ -5,10 +5,13 @@ const User = require('../model/User');
 const multer = require('multer');
 const { trackValidation } = require('../validation/validation');
 const AWS = require('aws-sdk');
-const{ v4: uuidv4 } = require('uuid');
+//const{ v4: uuidv4 } = require('uuid');
 const { link } = require('@hapi/joi');
+const crypto = require('crypto');
 
-uuid = uuidv4();
+//const id = crypto.randomBytes(20).toString('hex');
+
+//uuid = uuidv4();
 
 const s3 = new AWS.S3({
     accessKeyId: process.env.AWS_ACCESS_KEY_ID,
@@ -79,7 +82,7 @@ router.post('/', verify, upload.single('music_sheet'), async (req, res) => { // 
 
     const params = {
         Bucket: process.env.AWS_BUCKET_NAME,
-        Key: `${uuid}.pdf`,
+        Key: `${crypto.randomBytes(20).toString('hex')}.pdf`,
         Body: req.file.buffer,
         //ContentType: 'application/pdf',
         ACL: 'public-read'
