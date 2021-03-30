@@ -98,7 +98,7 @@ router.post('/', verify, async (req, res) => {
             });
             try {
                 const savedTrack = await track.save();
-                res.send(savedTrack._id);
+                res.send({id: savedTrack._id});
             } catch(err) {
                 res.status(400).send({error: err});
             }
