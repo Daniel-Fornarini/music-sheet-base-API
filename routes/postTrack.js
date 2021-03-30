@@ -38,15 +38,7 @@ let existFlag;
 const fileFilter = (req, file, cb) => {
     extensionFlag = true;
     existFlag = true;
-    const obj = {
-        title: req.body.title,
-        composer: req.body.composer,
-        duration: req.body.duration,
-        year_of_composition: req.body.year_of_composition,
-        key: req.body.key,
-        video: req.body.video
-    }
-    const { error } = trackValidation(obj);
+    const { error } = trackValidation(req.body);
 
     if(error) {
         cb(null, false);
@@ -83,15 +75,7 @@ router.post('/', verify, upload.single('music_sheet'), async (req, res) => { // 
         return res.status(400).send({error: 'only pdf'});
     }
 
-    const obj = {
-        title: req.body.title,
-        composer: req.body.composer,
-        duration: req.body.duration,
-        year_of_composition: req.body.year_of_composition,
-        key: req.body.key,
-        video: req.body.video
-    }
-    const { error } = trackValidation(obj);
+    const { error } = trackValidation(req.body);
     if(error) {
         return res.status(400).send({error: error.details[0].message});
     }
