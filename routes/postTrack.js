@@ -38,7 +38,15 @@ let existFlag;
 const fileFilter = (req, file, cb) => {
     extensionFlag = true;
     existFlag = true;
-    const { error } = trackValidation(req.body);
+    const obj = {
+        title: req.body.title,
+        composer: req.body.composer,
+        duration: req.body.duration,
+        year_of_composition: req.body.year_of_composition,
+        key: req.body.key,
+        video: req.body.video
+    }
+    const { error } = trackValidation(obj);
 
     if(error) {
         cb(null, false);
@@ -68,14 +76,22 @@ const upload = multer({ // inizializza multer e dice dove salvare i file
 router.post('/', verify, upload.single('music_sheet'), async (req, res) => { // upload.single() solo un file consentito. è un middleware
 
     if(!existFlag) {
-        return res.status(400).send({error: 'A file is required'});    
+        return res.status(400).send({error: 'a file is required'});    
     }
 
     if(!extensionFlag) {
-        return res.status(400).send({error: 'only pdf!'});
+        return res.status(400).send({error: 'only pdf'});
     }
 
-    const { error } = trackValidation(req.body);
+    const obj = {
+        title: req.body.title,
+        composer: req.body.composer,
+        duration: req.body.duration,
+        year_of_composition: req.body.year_of_composition,
+        key: req.body.key,
+        video: req.body.video
+    }
+    const { error } = trackValidation(obj);
     if(error) {
         return res.status(400).send({error: error.details[0].message});
     }
